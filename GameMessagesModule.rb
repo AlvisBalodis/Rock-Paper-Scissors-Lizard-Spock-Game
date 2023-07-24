@@ -107,6 +107,7 @@ module GameMessages
            *- Let's try again. -*
             *------------------*
     TEXT
+    puts "\n"
   end
 
   def score_display_msg(player, frodo, bilbo, merry)
