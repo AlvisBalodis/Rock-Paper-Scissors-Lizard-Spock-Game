@@ -26,12 +26,12 @@ module GameMessages
   end
 
   def display_choices(player, frodo, bilbo, merry)
-    puts msg = <<-TEXT                           
-            You:   #{player.upcase}
+    puts msg = <<-TEXT
+            You:        #{player.upcase}
 
-            Frodo: #{frodo.upcase}
-            Bilbo: #{bilbo.upcase}
-            Merry: #{merry.upcase}
+            Frodo:      #{frodo.upcase}
+            Bilbo:      #{bilbo.upcase}
+            Merry:      #{merry.upcase}
     TEXT
   end
 
@@ -61,42 +61,51 @@ module GameMessages
 
   def round_lost_msg(player, frodo, bilbo, merry)
     if frodo_win_player_round?(frodo, player)
-      puts msg = <<-TEXT 
-            --------------
-            FRODO won YOU!
-            --------------
+      puts "\n"
+      puts msg = <<-TEXT
+            *------------------*
+           *-  FRODO won YOU!  -*
+           *-      * * *       -*
+            *------------------*
       TEXT
       puts "\n"
     elsif bilbo_win_player_round?(bilbo, player)
-      puts msg = <<-TEXT 
-            --------------
-            BILBO won YOU!
-            --------------
+      puts "\n"
+      puts msg = <<-TEXT
+            *------------------*
+           *-  BILBO won YOU!  -*
+           *-      * * *       -*
+            *------------------*
       TEXT
       puts "\n"
     elsif merry_win_player_round?(merry, player)
-      puts msg = <<-TEXT 
-            --------------
-            MERRY won YOU!
-            --------------
+      puts "\n"
+      puts msg = <<-TEXT
+            *------------------*
+           *-  MERRY won YOU!  -*
+           *-      * * *       -*
+            *------------------*
       TEXT
       puts "\n"
     else
-      puts msg = <<-TEXT 
-            -------------------
-            YOU won this round!
-            -------------------
+      puts "\n"
+      puts msg = <<-TEXT
+            *------------------*
+           *-   YOU won this   -*
+           *-      round!      -*
+            *------------------*
       TEXT
       puts "\n"
     end
   end
 
   def round_tie_msg
+    puts "\n"
     puts msg = <<-TEXT
-            -----------------
-             Round is a Tie.
-             Let's try again.
-            -----------------
+            *------------------*
+           *-  Round is a Tie. -*
+           *- Let's try again. -*
+            *------------------*
     TEXT
   end
 
@@ -110,29 +119,30 @@ module GameMessages
 
   def game_win_msg(player, frodo, bilbo, merry)
     if frodo > player && frodo > bilbo && frodo > merry
-    puts "\n"
-    puts msg = <<-TEXT
+      puts "\n"
+      puts msg = <<-TEXT
            * * * * * * * * * * * * *
            *  FRODO WON THE GAME!  *
            * * * * * * * * * * * * *
     TEXT
     elsif bilbo > player && bilbo > frodo && bilbo > merry
       puts "\n"
-    puts msg = <<-TEXT
+      puts msg = <<-TEXT
            * * * * * * * * * * * * *
            *  BILBO WON THE GAME!  *
            * * * * * * * * * * * * *
     TEXT
     elsif merry > player && merry > frodo && merry > bilbo
       puts "\n"
-    puts msg = <<-TEXT
+      puts msg = <<-TEXT
            * * * * * * * * * * * * *
            *  MERRY WON THE GAME!  *
            * * * * * * * * * * * * *
     TEXT
-    else player > frodo && player > bilbo && player > merry
+    else
+      player > frodo && player > bilbo && player > merry
       puts "\n"
-    puts msg = <<-TEXT
+      puts msg = <<-TEXT
            * * * * * * * * * * * * *
            *   YOU WON THE GAME!   *
            * * * * * * * * * * * * *

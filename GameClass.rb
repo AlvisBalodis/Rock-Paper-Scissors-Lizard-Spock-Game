@@ -4,7 +4,6 @@ require_relative "BilboClass"
 require_relative "MerryClass"
 require_relative "GameMessagesModule"
 
-
 class Game
   attr_reader :player, :frodo, :bilbo, :merry
   include GameMessages
@@ -27,11 +26,11 @@ class Game
   def bilbo_win_player_round?(bilbo, player)
     WIN_RULES[bilbo].include?(player)
   end
-  
+
   def merry_win_player_round?(merry, player)
     WIN_RULES[merry].include?(player)
   end
-  
+
   def frodo_round_is_tie?(player, frodo)
     player == frodo
   end
@@ -49,7 +48,7 @@ class Game
   end
 
   def game_is_over?(player, frodo, bilbo, merry)
-     player > 3 && frodo > 3 && bilbo > 3 && merry > 3
+    player > 3 && frodo > 3 && bilbo > 3 && merry > 3
   end
 
   WIN_RULES = {
@@ -86,57 +85,113 @@ class Game
         puts bilbo_choice = bilbo.move
         puts merry_choice = merry.move
         game.clear_screen
-        game.display_choices(player_choice, frodo_choice, bilbo_choice, merry_choice)
+        game.display_choices(
+          player_choice,
+          frodo_choice,
+          bilbo_choice,
+          merry_choice
+        )
 
         if frodo_round_is_tie?(player_choice, frodo_choice)
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
           game.round_tie_msg
-
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         elsif bilbo_round_is_tie?(player_choice, bilbo_choice)
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
           game.round_tie_msg
-
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         elsif merry_round_is_tie?(player_choice, merry_choice)
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
           game.round_tie_msg
-           
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         elsif frodo_win_player_round?(frodo_choice, player_choice)
-          game.round_lost_msg(player_choice,frodo_choice, bilbo_choice, merry_choice)
+          game.round_lost_msg(
+            player_choice,
+            frodo_choice,
+            bilbo_choice,
+            merry_choice
+          )
           frodo_score += 1
           player_round += 1
           frodo_round += 1
           bilbo_round += 1
           merry_round += 1
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
-  
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         elsif bilbo_win_player_round?(bilbo_choice, player_choice)
-          game.round_lost_msg(player_choice, frodo_choice, bilbo_choice, merry_choice)
+          game.round_lost_msg(
+            player_choice,
+            frodo_choice,
+            bilbo_choice,
+            merry_choice
+          )
           bilbo_score += 1
           player_round += 1
           frodo_round += 1
           bilbo_round += 1
           merry_round += 1
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
-          
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         elsif merry_win_player_round?(merry_choice, player_choice)
-          game.round_lost_msg(player_choice, frodo_choice, bilbo_choice, merry_choice)
+          game.round_lost_msg(
+            player_choice,
+            frodo_choice,
+            bilbo_choice,
+            merry_choice
+          )
           merry_score += 1
           player_round += 1
           frodo_round += 1
           bilbo_round += 1
           merry_round += 1
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
-
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         else
           player_score += 1
           player_round += 1
           frodo_round += 1
           bilbo_round += 1
           merry_round += 1
-          game.round_lost_msg(player_choice, frodo_choice, bilbo_choice, merry_choice)
-          game.score_display_msg(player_score, frodo_score, bilbo_score, merry_score)
+          game.round_lost_msg(
+            player_choice,
+            frodo_choice,
+            bilbo_choice,
+            merry_choice
+          )
+          game.score_display_msg(
+            player_score,
+            frodo_score,
+            bilbo_score,
+            merry_score
+          )
         end
-        break if game_is_over?(player_round, frodo_round, bilbo_round, merry_round)
+        if game_is_over?(player_round, frodo_round, bilbo_round, merry_round)
+          break
+        end
       end
       if player_win_game?(player_score, frodo_score, bilbo_score, merry_score)
         game.game_win_msg(player_score, frodo_score, bilbo_score, merry_score)
